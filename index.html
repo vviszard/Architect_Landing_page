@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --page-margin: clamp(24px, 5vw, 64px);
+        --grid-gutter: 24px;
+        --theme-surface: #ffffff;
+        --theme-on-surface: #1a1a1a;
+        --theme-outline: #e5e5e5;
+        --cursor-color: #2563eb;
+      }
+
+      body {
+        background-color: var(--theme-surface);
+        color: var(--theme-on-surface);
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        overflow-x: hidden;
+        cursor: none; /* Hide default cursor for custom one */
+      }
+
+      /* Custom Grid System - Source Fidelity */
+      .grid-container {
+        width: 100%;
+        padding-right: var(--page-margin);
+        padding-left: var(--page-margin);
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1600px;
+      }
+
+      .grid-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: calc(var(--grid-gutter) / -2);
+        margin-left: calc(var(--grid-gutter) / -2);
+      }
+
+      .grid-col {
+        position: relative;
+        width: 100%;
+        padding-right: calc(var(--grid-gutter) / 2);
+        padding-left: calc(var(--grid-gutter) / 2);
+      }
+
+      /* Helper classes for columns matching Bootstrap-ish behavior requested */
+      .col-12 { flex: 0 0 100%; max-width: 100%; }
+      
+      @media (min-width: 768px) {
+        .col-md-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+        .col-md-6 { flex: 0 0 50%; max-width: 50%; }
+        .col-md-8 { flex: 0 0 66.666667%; max-width: 66.666667%; }
+        .col-md-12 { flex: 0 0 100%; max-width: 100%; }
+      }
+
+      /* Typography Utilities */
+      .font-mono { font-family: 'JetBrains Mono', monospace; }
+      
+      /* Cursor Styles */
+      .cursor-dot,
+      .cursor-dot-outline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 9999;
+        pointer-events: none;
+      }
+
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--theme-on-surface);
+      }
+
+      .cursor-dot-outline {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(26, 26, 26, 0.2);
+        transition: width 0.2s, height 0.2s, background-color 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0);
+        backdrop-filter: blur(0px);
+      }
+
+      body.hover-active .cursor-dot-outline {
+        width: auto;
+        height: 48px;
+        padding: 0 24px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.9);
+        border-color: var(--theme-outline);
+        box-shadow: 0 10px 30px -10px rgba(0,0,0,0.15);
+        backdrop-filter: blur(4px);
+      }
+
+      .cursor-label {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.2s, transform 0.2s;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      body.hover-active .cursor-label {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Hide dot when hover active to keep it clean */
+      body.hover-active .cursor-dot {
+        opacity: 0;
+      }
+    </style>
+    <link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
